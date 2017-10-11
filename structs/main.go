@@ -12,25 +12,41 @@ type contactInfo struct {
 type person struct {
 	firstName string
 	lastName  string
-	contact   contactInfo
+	contactInfo
 }
 
 func main() {
 	rick := person{
 		firstName: "Rick",
 		lastName:  "Roche",
-		contact: contactInfo{
+		contactInfo: contactInfo{
 			email:   "test@test.com",
 			zipCode: 12345,
 		},
 	}
 
-	// var rick person
-	// rick.firstName = "Rick"
-	// rick.lastName = "Roche"
-	// rick.contact.email = "test@test.com"
-	// rick.contact.zipCode = 1234
+	// rickPointer := &rick
+	// rickPointer.updateName("Richard")
+	rick.updateName("Richard")
+	rick.print()
 
-	// fmt.Println(rick)
-	fmt.Printf("%+v", rick)
+	// value types: [use pointers to change these in functions]
+	// - int, float, string, bool
+	// - structs
+
+	// referenced types: [dont worry about pointers with these]
+	// - slices
+	// - maps
+	// - channels
+	// - pointers
+	// - functions
+
+}
+
+func (p *person) updateName(newFirstName string) {
+	(*p).firstName = newFirstName
+}
+
+func (p person) print() {
+	fmt.Printf("%+v", p)
 }
